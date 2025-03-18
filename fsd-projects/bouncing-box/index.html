@@ -52,7 +52,7 @@
 			setInterval(update, 50);
 
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
-			box.on('click',); 
+			box.on('click', handleBoxClick); 
 
 
 			// moves the Box to a new position on the screen along the X-Axis
@@ -62,7 +62,7 @@
 			}
 
 			// changes the text displayed on the Box
-			function changeBoxText() {
+			function changeBoxText(newText) {
 				box.text(newText);
 			}
 
@@ -72,20 +72,33 @@
 
 			// TODO 2 - Variable declarations 
 			var positionX = 0;
-			var points = 0;			
+			var points 		
 			var speed = 10;
-			
+			points = 0;
 
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
 			turn it around! 
 			*/
-			function update();
+			function update(){
 				moveBoxTo(positionX);
-				positionX = positionX + speed
 
-			};
+				positionX = positionX + speed;
+
+				if (positionX > boardWidth) {
+ 							 // Code to reverse speed goes here
+							 speed = speed * -1;
+				}
+							 if (positionX < 0) {
+  								// Code to reverse speed goes here
+								speed *= -1;
+								moveBoxTo(positionX, positionY);
+			}
+
+	
+				
+			}
 
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
@@ -94,10 +107,11 @@
 			*/
 			function handleBoxClick() {
 			 positionX = 0;
-				changeBoxText(points)
-				speed = speed + 3
+				speed = 3 * points + 10;
+				points = points + 1;
+				changeBoxText(points);
 
-			};
+			}
 
 
 
